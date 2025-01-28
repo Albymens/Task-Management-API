@@ -1,6 +1,7 @@
 package com.albymens.task_management.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotEmpty;
 
 import java.util.List;
 
@@ -9,8 +10,9 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-
+    @NotEmpty
     private String username;
+    @NotEmpty
     private String password;
 
     @OneToMany(mappedBy = "user")

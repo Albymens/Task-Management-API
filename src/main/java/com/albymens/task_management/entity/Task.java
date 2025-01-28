@@ -1,7 +1,6 @@
 package com.albymens.task_management.entity;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.FutureOrPresent;
 import jakarta.validation.constraints.NotEmpty;
 
 import java.time.LocalDate;
@@ -28,7 +27,7 @@ public class Task {
     @JoinColumn(name = "user_id")
     private User user;
 
-    @FutureOrPresent
+//    @FutureOrPresent
     private LocalDate deadline;
 
     public Long getId() {

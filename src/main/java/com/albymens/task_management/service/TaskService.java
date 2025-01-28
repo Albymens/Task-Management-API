@@ -1,4 +1,4 @@
-package com.albymens.task_management;
+package com.albymens.task_management.service;
 
 import com.albymens.task_management.entity.Task;
 import com.albymens.task_management.entity.User;
