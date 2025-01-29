@@ -20,7 +20,7 @@ public class UserController {
     @Autowired
     UserService userService;
 
-    @PostMapping("/user/add")
+    @PostMapping("/user/register")
     public ResponseEntity<APIResponse> createUser(@RequestBody @Valid User user, BindingResult result){
         if(result.hasErrors()){
             Map<String, String> errorMessage = new HashMap<>();
@@ -30,6 +30,6 @@ public class UserController {
             });
             return ResponseEntity.status(400).body(new APIResponse(false, null, errorMessage));
         }
-        return ResponseEntity.status(202).body(userService.createUser(user));
+        return ResponseEntity.status(201).body(userService.createUser(user));
     }
 }

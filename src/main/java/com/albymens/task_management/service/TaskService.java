@@ -33,7 +33,7 @@ public class TaskService {
             );
         }
         task.setUser(user);
-        return ResponseEntity.status(202).body(
+        return ResponseEntity.status(201).body(
                 new APIResponse(true, "Task created successfully", taskRepository.save(task))
         );
     }

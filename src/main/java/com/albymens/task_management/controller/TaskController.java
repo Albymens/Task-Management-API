@@ -18,12 +18,12 @@ public class TaskController {
 
     @PostMapping("/task/add")
     public ResponseEntity<APIResponse> createTask(@RequestBody Task task,
-                                                  @RequestParam(value = "username") String username){
+                                                  @RequestHeader(value = "username") String username){
         return taskService.createTask(username,task);
     }
 
     @GetMapping("/")
-    public ResponseEntity<APIResponse> retrieveUserTasks(@RequestParam(name = "username") String username){
+    public ResponseEntity<APIResponse> retrieveUserTasks(@RequestHeader(name = "username") String username){
         return taskService.retrieveUserTasks(username);
     }
 

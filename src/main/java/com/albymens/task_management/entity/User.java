@@ -1,5 +1,6 @@
 package com.albymens.task_management.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 
@@ -24,6 +25,7 @@ public class User implements Serializable {
     @NotEmpty
     private String password;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "user")
     private List<Task> tasks;
 
