@@ -1,11 +1,15 @@
 package com.albymens.task_management.controller;
 
+import com.albymens.task_management.entity.Priority;
+import com.albymens.task_management.entity.Status;
 import com.albymens.task_management.response.APIResponse;
 import com.albymens.task_management.service.TaskService;
 import com.albymens.task_management.entity.Task;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.time.LocalDate;
 
 @RestController
 public class TaskController {
@@ -35,4 +39,13 @@ public class TaskController {
                                                  @PathVariable Long taskId){
         return taskService.deleteTask(username, taskId);
     }
+
+    @GetMapping("/filter")
+    public ResponseEntity<APIResponse> filterTask(@RequestHeader("username") String username,
+                                                  @RequestParam(required = false) Status status,
+                                                  @RequestParam(required = false) Priority priority,
+                                                  @RequestParam(required = false) LocalDate deadline){
+        return taskService.filterTasks(username, priority, status, deadline);
+    }
+
 }

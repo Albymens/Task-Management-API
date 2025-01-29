@@ -1,6 +1,8 @@
 package com.albymens.task_management.service;
 
 import ch.qos.logback.core.util.StringUtil;
+import com.albymens.task_management.entity.Priority;
+import com.albymens.task_management.entity.Status;
 import com.albymens.task_management.entity.Task;
 import com.albymens.task_management.entity.User;
 import com.albymens.task_management.repository.TaskRepository;
@@ -10,7 +12,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class TaskService {
@@ -108,6 +113,34 @@ public class TaskService {
         return ResponseEntity.ok(
                new APIResponse(true, "Task deleted successfully", null)
         );
+    }
 
+    public ResponseEntity<APIResponse> filterTasks(String username, Priority priority,
+                                  Status status, LocalDate deadline){
+
+        User user = userRepository.findByUsername(username);
+        if(null == user){
+            return ResponseEntity.status(404).body(
+                    new APIResponse(false, "User not found", null)
+            );
+        }
+
+        List<Task> tasks = taskRepository.findByUser(user);
+        if(status != null){
+            tasks = tasks.stream().filter(task -> task.getStatus().equals(status))
+                    .collect(Collectors.toList());
+        }
+
+        if(priority != null){
+            tasks = tasks.stream().filter(task -> task.getPriority().equals(priority))
+                    .collect(Collectors.toList());
+        }
+
+        if(deadline != null){
+            tasks = tasks.stream().filter(task -> task.getDeadline().equals(deadline))
+                    .collect(Collectors.toList());
+        }
+
+        return ResponseEntity.ok().body(new APIResponse(true, null, tasks));
     }
 }
