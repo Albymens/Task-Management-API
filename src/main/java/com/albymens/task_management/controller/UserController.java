@@ -1,6 +1,7 @@
 package com.albymens.task_management.controller;
 
 import com.albymens.task_management.entity.User;
+import com.albymens.task_management.response.APIResponse;
 import com.albymens.task_management.service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,14 +21,14 @@ public class UserController {
     UserService userService;
 
     @PostMapping("/user/add")
-    public ResponseEntity<Object> createUser(@RequestBody @Valid User user, BindingResult result){
+    public ResponseEntity<APIResponse> createUser(@RequestBody @Valid User user, BindingResult result){
         if(result.hasErrors()){
             Map<String, String> errorMessage = new HashMap<>();
             result.getAllErrors().forEach(error -> {
                 String fieldName = ((FieldError) error).getField();
                 errorMessage.put(fieldName, error.getDefaultMessage());
             });
-            return ResponseEntity.status(400).body(errorMessage);
+            return ResponseEntity.status(400).body(new APIResponse(false, null, errorMessage));
         }
         return ResponseEntity.status(202).body(userService.createUser(user));
     }

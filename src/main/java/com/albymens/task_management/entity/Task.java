@@ -3,10 +3,15 @@ package com.albymens.task_management.entity;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 
+import java.io.Serial;
+import java.io.Serializable;
 import java.time.LocalDate;
 
 @Entity
-public class Task {
+@Table(name = "task")
+public class Task implements Serializable {
+    @Serial
+    private static final long serialVersionUID = 1L;
 
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Id

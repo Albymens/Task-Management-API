@@ -3,15 +3,24 @@ package com.albymens.task_management.entity;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 
+import java.io.Serial;
+import java.io.Serializable;
 import java.util.List;
 
 @Entity
-public class User {
+@Table(name = "user")
+public class User implements Serializable {
+
+    @Serial
+    private static final long serialVersionUID = 1L;
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+
     @NotEmpty
     private String username;
+
     @NotEmpty
     private String password;
 
@@ -40,5 +49,13 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public List<Task> getTasks() {
+        return tasks;
+    }
+
+    public void setTasks(List<Task> tasks) {
+        this.tasks = tasks;
     }
 }

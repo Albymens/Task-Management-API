@@ -1,5 +1,6 @@
 package com.albymens.task_management.controller;
 
+import com.albymens.task_management.response.APIResponse;
 import com.albymens.task_management.service.TaskService;
 import com.albymens.task_management.entity.Task;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,8 +13,26 @@ public class TaskController {
     TaskService taskService;
 
     @PostMapping("/task/add")
-    public ResponseEntity<Task> createTask(@RequestBody Task task,
-                                           @RequestParam(value = "username") String username){
-        return ResponseEntity.status(202).body(taskService.createTask(username,task));
+    public ResponseEntity<APIResponse> createTask(@RequestBody Task task,
+                                                  @RequestParam(value = "username") String username){
+        return taskService.createTask(username,task);
+    }
+
+    @GetMapping("/")
+    public ResponseEntity<APIResponse> retrieveUserTasks(@RequestParam(name = "username") String username){
+        return taskService.retrieveUserTasks(username);
+    }
+
+    @PutMapping("/{taskId}")
+    public ResponseEntity<APIResponse> updateTask(@RequestHeader("username") String username,
+                                                  @PathVariable Long taskId,
+                                                  @RequestBody Task updatedTask){
+        return taskService.updateUserTask(username, updatedTask, taskId);
+    }
+
+    @DeleteMapping("/{taskId}")
+    public ResponseEntity<APIResponse> deleteTak(@RequestHeader("username") String username,
+                                                 @PathVariable Long taskId){
+        return taskService.deleteTask(username, taskId);
     }
 }
