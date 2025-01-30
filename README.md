@@ -14,4 +14,5 @@ Steps
 - login with the same username and password `POST /auth/login`
 - Obtain JWT Token from the login response object
 - Add the JWT token to the `Authorization` header for subsequent requests.
+- Add username to the header it should be the longin username `username: your_username`.
 
