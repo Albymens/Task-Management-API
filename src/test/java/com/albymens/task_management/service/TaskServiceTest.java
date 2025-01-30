@@ -16,7 +16,9 @@ import org.mockito.MockitoAnnotations;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
+import java.time.LocalDate;
 import java.util.Objects;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
@@ -32,6 +34,7 @@ public class TaskServiceTest {
     Task task;
     User user;
     APIResponse apiResponse;
+    LocalDate fixedDate;
 
     @BeforeEach()
     public void setup(){
@@ -40,12 +43,16 @@ public class TaskServiceTest {
         task = new Task();
         task.setTitle("Learn");
         task.setDescription("Deep dive into Deepseek");
-        task.setPriority(Priority.MEDIUM);
-        task.setStatus(Status.PENDING);
+        task.setPriority(Priority.HIGH);
+        task.setStatus(Status.COMPLETED);
+        fixedDate = LocalDate.of(2025, 2, 5);
+        task.setDeadline(fixedDate);
+        task.setId(1L);
 
         user = new User();
         user.setUsername("Alby");
         user.setPassword("30AQ23ER");
+        task.setUser(user);
 
     }
 
@@ -69,13 +76,33 @@ public class TaskServiceTest {
 
     @Test
     public void updateUserTask() {
+        Task updatedTask = new Task();
+        updatedTask.setUser(user);
+        updatedTask.setDescription("To update task description");
+        when(userRepository.findByUsername(Mockito.anyString())).thenReturn(user);
+        when(taskRepository.findById(Mockito.anyLong())).thenReturn(Optional.of(task));
+        String responseMsg = "Task updated successfully!!";
+        ResponseEntity<APIResponse> response = taskService.updateUserTask(user.getUsername(),updatedTask, task.getId());
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertEquals(responseMsg, Objects.requireNonNull(response.getBody()).getMessage());
     }
 
     @Test
     public void deleteTask() {
+        when(userRepository.findByUsername(Mockito.anyString())).thenReturn(user);
+        when(taskRepository.findById(Mockito.anyLong())).thenReturn(Optional.of(task));
+        String responseMsg = "Task deleted successfully";
+        ResponseEntity<APIResponse> response = taskService.deleteTask("Sonia", task.getId());
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertEquals(responseMsg, Objects.requireNonNull(response.getBody()).getMessage());
     }
 
     @Test
     public void filterTasks() {
+        when(userRepository.findByUsername(Mockito.anyString())).thenReturn(user);
+        when(taskRepository.findById(Mockito.anyLong())).thenReturn(Optional.of(task));
+        ResponseEntity<APIResponse> response = taskService.filterTasks("Sonia",
+                Priority.HIGH, Status.COMPLETED, fixedDate);
+        assertEquals(HttpStatus.OK, response.getStatusCode());
     }
 }

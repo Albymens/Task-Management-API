@@ -32,7 +32,6 @@ public class Task implements Serializable {
     @JoinColumn(name = "user_id")
     private User user;
 
-//    @FutureOrPresent
     private LocalDate deadline;
 
     public Long getId() {

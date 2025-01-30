@@ -2,6 +2,8 @@ package com.albymens.task_management.controller;
 
 import com.albymens.task_management.response.APIResponse;
 import com.albymens.task_management.service.JwtTokenProviderService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -20,6 +22,8 @@ public class AuthController {
     @Autowired
     JwtTokenProviderService jwtTokenProvider;
 
+    private static final Logger logger = LoggerFactory.getLogger(AuthController.class);
+
     @PostMapping("/login")
     public ResponseEntity<APIResponse> login(@RequestHeader("username") String username,
                                              @RequestHeader("password") String password){
@@ -28,10 +32,16 @@ public class AuthController {
                 new UsernamePasswordAuthenticationToken(username, password)
         );
 
+        if (!authentication.isAuthenticated()){
+            logger.error("{} login credentials failed", username);
+            return ResponseEntity.status(401).body(new APIResponse(false, "Unauthorized", null));
+        }
+
         String token = jwtTokenProvider.generateToken(authentication.getName());
         Map<String, String> data = new HashMap<>();
         data.put("token", token);
 
-        return ResponseEntity.ok(new APIResponse(true, "Login successfully!!!", data));
+        logger.info("{} login successfully", username);
+        return ResponseEntity.ok(new APIResponse(true, "Welcome!! You've Login successfully", data));
     }
 }

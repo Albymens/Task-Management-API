@@ -8,6 +8,8 @@ import com.albymens.task_management.entity.User;
 import com.albymens.task_management.repository.TaskRepository;
 import com.albymens.task_management.repository.UserRepository;
 import com.albymens.task_management.response.APIResponse;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -24,10 +26,12 @@ public class TaskService {
     TaskRepository taskRepository;
     @Autowired
     UserRepository userRepository;
+    private static final Logger logger = LoggerFactory.getLogger(CustomerUserDetailsService.class);
 
     public ResponseEntity<APIResponse> createTask(String username, Task task){
         User user = userRepository.findByUsername(username);
         if (null == user){
+            logger.error("Unable to create user {}", username);
             return ResponseEntity.badRequest().body(
                     new APIResponse(false, "User not found", null)
             );
@@ -41,6 +45,7 @@ public class TaskService {
     public ResponseEntity<APIResponse> retrieveUserTasks(String username){
         User user = userRepository.findByUsername(username);
         if (null == user){
+            logger.error("Unable to retrieve {} tasks, user not found", username);
             return ResponseEntity.status(404).body(
                     new APIResponse(false, "User not found", null)
             );
@@ -53,6 +58,7 @@ public class TaskService {
     public ResponseEntity<APIResponse> updateUserTask(String username, Task updatedTask, Long taskId){
         Optional<Task> task = taskRepository.findById(taskId);
         if(task.isEmpty()){
+            logger.error("Unable to update {} task, task not found", taskId);
             return ResponseEntity.status(404).body(
                     new APIResponse(false, "Task not found", null)
             );
@@ -60,12 +66,14 @@ public class TaskService {
 
         User user = userRepository.findByUsername(username);
         if(user == null){
+            logger.error("Unable to update {} task, user not found", username);
             return ResponseEntity.status(404).body(
                     new APIResponse(false, "Unable to retrieve user details, user not found", null)
             );
         }
 
         if(!task.get().getUser().equals(user)){
+            logger.error("Unable to update {} task, unauthorized ", username);
             return ResponseEntity.status(401).body(
                     new APIResponse(false, "Unauthorized", null)
             );
@@ -91,6 +99,7 @@ public class TaskService {
     public ResponseEntity<APIResponse> deleteTask(String username, Long taskId){
         User user = userRepository.findByUsername(username);
         if(null == user){
+            logger.error("Unable to delete {} task, user not found", username);
             return ResponseEntity.status(404).body(
                     new APIResponse(false, "User not found", null)
             );
@@ -98,18 +107,21 @@ public class TaskService {
 
         Optional<Task> task = taskRepository.findById(taskId);
         if(task.isEmpty()){
+            logger.error("Unable to delete {} task, task not found", taskId);
             return ResponseEntity.status(404).body(
                     new APIResponse(false, "Task not found", null)
             );
         }
 
         if(!user.equals(task.get().getUser())){
+            logger.error("Unable to delete {} task, unauthorized ", username);
             return ResponseEntity.status(401).body(
                     new APIResponse(false, "unauthorized", null)
             );
         }
 
         taskRepository.delete(task.get());
+        logger.info("Task deleted by {}", username);
         return ResponseEntity.ok(
                new APIResponse(true, "Task deleted successfully", null)
         );
