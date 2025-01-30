@@ -1,0 +1,492 @@
+{
+	"info": {
+		"_postman_id": "1fa1ec3e-6abb-4bdf-ae4e-8c078c83d696",
+		"name": "Task Management",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "38116675"
+	},
+	"item": [
+		{
+			"name": "Create Task",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": [
+				{
+					"name": "Success - Create Task",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "username",
+								"value": "Alby123",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"title\": \"Another task\",\n  \"description\": \"task\",\n  \"priority\": \"LOW\",\n  \"status\": \"PENDING\",\n  \"deadline\": \"2024-09-05\",\n  \"user\": {\n    \"id\": 1\n  }\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/tasks"
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "X-XSS-Protection",
+							"value": "0"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, no-store, max-age=0, must-revalidate"
+						},
+						{
+							"key": "Pragma",
+							"value": "no-cache"
+						},
+						{
+							"key": "Expires",
+							"value": "0"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "DENY"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 30 Jan 2025 15:41:50 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": true,\n    \"message\": \"Task created successfully\",\n    \"data\": {\n        \"id\": 2,\n        \"title\": \"Another task\",\n        \"description\": \"task\",\n        \"priority\": \"LOW\",\n        \"status\": \"PENDING\",\n        \"user\": {\n            \"id\": 752,\n            \"username\": \"Alby123\"\n        },\n        \"deadline\": \"2024-09-05\"\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "Create User",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": [
+				{
+					"name": "Success -  Create User",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{  \n    \"username\":\"Alby123\",\n    \"password\":\"qwey3r\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/user/register"
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "X-XSS-Protection",
+							"value": "0"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, no-store, max-age=0, must-revalidate"
+						},
+						{
+							"key": "Pragma",
+							"value": "no-cache"
+						},
+						{
+							"key": "Expires",
+							"value": "0"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "DENY"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 30 Jan 2025 15:40:59 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": true,\n    \"message\": \"User created successfully\",\n    \"data\": {\n        \"id\": 752,\n        \"username\": \"Alby123\"\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "Retrieve All tasks",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": [
+				{
+					"name": "Success -  Retrieve Tasks",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "username",
+								"value": "Alby",
+								"type": "text"
+							}
+						],
+						"url": "http://localhost:8080/tasks"
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "X-XSS-Protection",
+							"value": "0"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, no-store, max-age=0, must-revalidate"
+						},
+						{
+							"key": "Pragma",
+							"value": "no-cache"
+						},
+						{
+							"key": "Expires",
+							"value": "0"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "DENY"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 30 Jan 2025 15:41:41 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": true,\n    \"message\": \"Tasks retrieved successfully\",\n    \"data\": [\n        {\n            \"id\": 1,\n            \"title\": \"Another task\",\n            \"description\": \"task\",\n            \"priority\": \"LOW\",\n            \"status\": \"PENDING\",\n            \"user\": {\n                \"id\": 652,\n                \"username\": \"Alby\"\n            },\n            \"deadline\": \"2024-09-05\"\n        }\n    ]\n}"
+				}
+			]
+		},
+		{
+			"name": "Delete Task",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": [
+				{
+					"name": "Success - Delete Task",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "username",
+								"value": "Alby",
+								"type": "text"
+							}
+						],
+						"url": "http://localhost:8080/tasks/1"
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "X-XSS-Protection",
+							"value": "0"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, no-store, max-age=0, must-revalidate"
+						},
+						{
+							"key": "Pragma",
+							"value": "no-cache"
+						},
+						{
+							"key": "Expires",
+							"value": "0"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "DENY"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 30 Jan 2025 15:41:57 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": true,\n    \"message\": \"Task deleted successfully\",\n    \"data\": null\n}"
+				}
+			]
+		},
+		{
+			"name": "Filter Task",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": [
+				{
+					"name": "Success -Filter Task",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "username",
+								"value": "Alby123",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/tasks/filter?deadline=2024-09-05&status=PENDING",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"tasks",
+								"filter"
+							],
+							"query": [
+								{
+									"key": "deadline",
+									"value": "2024-09-05"
+								},
+								{
+									"key": "status",
+									"value": "PENDING"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "X-XSS-Protection",
+							"value": "0"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, no-store, max-age=0, must-revalidate"
+						},
+						{
+							"key": "Pragma",
+							"value": "no-cache"
+						},
+						{
+							"key": "Expires",
+							"value": "0"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "DENY"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 30 Jan 2025 15:47:20 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": true,\n    \"message\": null,\n    \"data\": [\n        {\n            \"id\": 2,\n            \"title\": \"Another task\",\n            \"description\": \"task\",\n            \"priority\": \"LOW\",\n            \"status\": \"PENDING\",\n            \"user\": {\n                \"id\": 752,\n                \"username\": \"Alby123\"\n            },\n            \"deadline\": \"2024-09-05\"\n        },\n        {\n            \"id\": 3,\n            \"title\": \"Another task\",\n            \"description\": \"task\",\n            \"priority\": \"LOW\",\n            \"status\": \"PENDING\",\n            \"user\": {\n                \"id\": 752,\n                \"username\": \"Alby123\"\n            },\n            \"deadline\": \"2024-09-05\"\n        },\n        {\n            \"id\": 4,\n            \"title\": \"Another task\",\n            \"description\": \"task\",\n            \"priority\": \"LOW\",\n            \"status\": \"PENDING\",\n            \"user\": {\n                \"id\": 752,\n                \"username\": \"Alby123\"\n            },\n            \"deadline\": \"2024-09-05\"\n        },\n        {\n            \"id\": 5,\n            \"title\": \"Another task 1\",\n            \"description\": \"task\",\n            \"priority\": \"LOW\",\n            \"status\": \"PENDING\",\n            \"user\": {\n                \"id\": 752,\n                \"username\": \"Alby123\"\n            },\n            \"deadline\": \"2024-09-05\"\n        }\n    ]\n}"
+				}
+			]
+		},
+		{
+			"name": "Login User",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": [
+				{
+					"name": "Successful Login Example",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "username",
+								"value": "Alby",
+								"type": "text"
+							},
+							{
+								"key": "password",
+								"value": "qwey3r",
+								"type": "text"
+							}
+						],
+						"url": "http://localhost:8080/auth/login"
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "X-XSS-Protection",
+							"value": "0"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, no-store, max-age=0, must-revalidate"
+						},
+						{
+							"key": "Pragma",
+							"value": "no-cache"
+						},
+						{
+							"key": "Expires",
+							"value": "0"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "DENY"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 30 Jan 2025 01:55:20 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": true,\n    \"message\": \"Login successfully!!!\",\n    \"data\": {\n        \"token\": \"eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJBbGJ5IiwiaWF0IjoxNzM4MjAyMTIwLCJleHAiOjE3MzgyMDM5MjB9.teEOBf0CeaPICK7x4MxkzK64RdBg5kVX1EuYFN1eKps\"\n    }\n}"
+				}
+			]
+		}
+	]
+}

@@ -16,31 +16,31 @@ public class TaskController {
     @Autowired
     TaskService taskService;
 
-    @PostMapping("/task/add")
+    @PostMapping("/tasks")
     public ResponseEntity<APIResponse> createTask(@RequestBody Task task,
                                                   @RequestHeader(value = "username") String username){
         return taskService.createTask(username,task);
     }
 
-    @GetMapping("/")
+    @GetMapping("/tasks")
     public ResponseEntity<APIResponse> retrieveUserTasks(@RequestHeader(name = "username") String username){
         return taskService.retrieveUserTasks(username);
     }
 
-    @PutMapping("/{taskId}")
+    @PutMapping("/tasks/{taskId}")
     public ResponseEntity<APIResponse> updateTask(@RequestHeader("username") String username,
                                                   @PathVariable Long taskId,
                                                   @RequestBody Task updatedTask){
         return taskService.updateUserTask(username, updatedTask, taskId);
     }
 
-    @DeleteMapping("/{taskId}")
+    @DeleteMapping("/tasks/{taskId}")
     public ResponseEntity<APIResponse> deleteTak(@RequestHeader("username") String username,
                                                  @PathVariable Long taskId){
         return taskService.deleteTask(username, taskId);
     }
 
-    @GetMapping("/filter")
+    @GetMapping("/tasks/filter")
     public ResponseEntity<APIResponse> filterTask(@RequestHeader("username") String username,
                                                   @RequestParam(required = false) Status status,
                                                   @RequestParam(required = false) Priority priority,
