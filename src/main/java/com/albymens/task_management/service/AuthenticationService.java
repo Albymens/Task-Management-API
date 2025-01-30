@@ -1,6 +1,5 @@
 package com.albymens.task_management.service;
 
-import com.albymens.task_management.controller.AuthController;
 import com.albymens.task_management.entity.User;
 import com.albymens.task_management.repository.UserRepository;
 import com.albymens.task_management.response.APIResponse;
