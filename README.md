@@ -9,9 +9,9 @@ _**Bearer Token:**_ Authenticate using JWT before accessing user-specific endpoi
 **_Sample Requests:_** Available at resources/test-sample/Task Management.postman_collection.json.
 Steps
 
-## Register User: POST /user/register
-Login: POST /auth/login (Obtain JWT token from the response)
-Authenticate: Add the JWT token to the Authorization header for subsequent requests.
-- login `POST /auth/login`
+## Register User & Login
+- Register the user with username and password `POST /user/register`
+- login with the same username and password `POST /auth/login`
 - Obtain JWT Token from the login response object
--  Add the JWT token to the `Authorization` header for the rest of the endpoint
+- Add the JWT token to the `Authorization` header for subsequent requests.
+
