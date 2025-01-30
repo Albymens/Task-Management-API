@@ -15,6 +15,7 @@ public class UserService {
     UserRepository userRepository;
     @Autowired
     PasswordEncoder passwordEncoder;
+
     private static final Logger logger = LoggerFactory.getLogger(CustomerUserDetailsService.class);
 
 
