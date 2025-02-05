@@ -5,20 +5,39 @@ import com.albymens.task_management.entity.Status;
 import com.albymens.task_management.response.APIResponse;
 import com.albymens.task_management.service.TaskService;
 import com.albymens.task_management.entity.Task;
+import jakarta.validation.Valid;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
+import java.util.HashMap;
+import java.util.Map;
 
 @RestController
 public class TaskController {
+    private static final Logger logger = LoggerFactory.getLogger(TaskController.class);
+
     @Autowired
     TaskService taskService;
 
     @PostMapping("/tasks")
-    public ResponseEntity<APIResponse> createTask(@RequestBody Task task,
-                                                  @RequestHeader(value = "username") String username){
+    public ResponseEntity<APIResponse> createTask(@RequestBody @Valid Task task,
+                                                  @RequestHeader(value = "username") String username,
+                                                  BindingResult result){
+        if(result.hasErrors()){
+            Map<String, String> errorMessage = new HashMap<>();
+            result.getAllErrors().forEach(error -> {
+                String fieldName = ((FieldError) error).getField();
+                errorMessage.put(fieldName, error.getDefaultMessage());
+                logger.error("Error creating user details {} {}", fieldName, error.getDefaultMessage());
+            });
+            return ResponseEntity.status(400).body(new APIResponse(false, null, errorMessage));
+        }
         return taskService.createTask(username,task);
     }
 

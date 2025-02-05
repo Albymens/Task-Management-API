@@ -2,7 +2,6 @@ package com.albymens.task_management.controller;
 
 import com.albymens.task_management.entity.User;
 import com.albymens.task_management.response.APIResponse;
-import com.albymens.task_management.service.CustomerUserDetailsService;
 import com.albymens.task_management.service.UserService;
 import jakarta.validation.Valid;
 import org.slf4j.Logger;
@@ -23,7 +22,7 @@ public class UserController {
     @Autowired
     UserService userService;
 
-    private static final Logger logger = LoggerFactory.getLogger(CustomerUserDetailsService.class);
+    private static final Logger logger = LoggerFactory.getLogger(UserController.class);
 
 
     @PostMapping("/user/register")

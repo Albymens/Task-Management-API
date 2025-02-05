@@ -26,7 +26,7 @@ public class TaskService {
     TaskRepository taskRepository;
     @Autowired
     UserRepository userRepository;
-    private static final Logger logger = LoggerFactory.getLogger(CustomerUserDetailsService.class);
+    private static final Logger logger = LoggerFactory.getLogger(TaskService.class);
 
     public ResponseEntity<APIResponse> createTask(String username, Task task){
         User user = userRepository.findByUsername(username);

@@ -16,7 +16,7 @@ public class UserService {
     @Autowired
     PasswordEncoder passwordEncoder;
 
-    private static final Logger logger = LoggerFactory.getLogger(CustomerUserDetailsService.class);
+    private static final Logger logger = LoggerFactory.getLogger(UserService.class);
 
 
     public APIResponse createUser(User user){
