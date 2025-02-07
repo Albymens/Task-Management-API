@@ -3,6 +3,8 @@ package com.albymens.task_management.controller;
 import com.albymens.task_management.entity.User;
 import com.albymens.task_management.response.APIResponse;
 import com.albymens.task_management.service.UserService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,6 +20,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @RestController
+@Tag(name = "User Registration", description = "Endpoints for user registration")
 public class UserController {
     @Autowired
     UserService userService;
@@ -26,6 +29,11 @@ public class UserController {
 
 
     @PostMapping("/user/register")
+    @Operation(
+         summary = "Register a New User",
+            description = "This endpoint allows new users to register by providing their details such as username, and password. " +
+                    " Successful registration generates a response with user information and a confirmation of the registration."
+    )
     public ResponseEntity<APIResponse> createUser(@RequestBody @Valid User user, BindingResult result){
         logger.info("Received user details ");
         if(result.hasErrors()){

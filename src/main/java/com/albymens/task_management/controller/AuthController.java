@@ -2,9 +2,10 @@ package com.albymens.task_management.controller;
 
 import com.albymens.task_management.response.APIResponse;
 import com.albymens.task_management.service.JwtTokenProviderService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -16,15 +17,25 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/auth")
+@Tag(name = "Authentication",
+        description = "Endpoints for user authentication, including login and JWT token management.")
 public class AuthController {
-    @Autowired
-    AuthenticationManager authenticationManager;
-    @Autowired
-    JwtTokenProviderService jwtTokenProvider;
+    private final AuthenticationManager authenticationManager;
+    private final JwtTokenProviderService jwtTokenProvider;
+
+    public AuthController(AuthenticationManager authenticationManager, JwtTokenProviderService jwtTokenProvider) {
+        this.authenticationManager = authenticationManager;
+        this.jwtTokenProvider = jwtTokenProvider;
+    }
 
     private static final Logger logger = LoggerFactory.getLogger(AuthController.class);
 
     @PostMapping("/login")
+    @Operation(
+            summary = "User Login",
+            description = "This endpoint allows users to login, After a successful login a Jwt token is generated" +
+                    "and returned. This token must be used in the header for subsequent request to access protected resources"
+    )
     public ResponseEntity<APIResponse> login(@RequestHeader("username") String username,
                                              @RequestHeader("password") String password){
 

@@ -1,5 +1,6 @@
 package com.albymens.task_management.entity;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 
@@ -15,21 +16,27 @@ public class Task implements Serializable {
 
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Id
+    @Schema(hidden = true)
     private Long id;
 
     @NotEmpty
+    @Schema(description = "Title of the task")
     private String title;
 
+    @Schema(description = "A detailed description of the task or anything you will like to highlight")
     private String description;
 
     @Enumerated(EnumType.STRING)
+    @Schema(description = "The level of task priority (HIGH, MEDIUM, LOW)")
     private Priority priority;
 
     @Enumerated(EnumType.STRING)
+    @Schema(description = "The status of the task (BACKLOG, TODO, PENDING, IN_PROGRESS, COMPLETED")
     private Status status;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
+    @Schema(description = "The owner of the task")
     private User user;
 
     private LocalDate deadline;
