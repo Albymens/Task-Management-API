@@ -7,7 +7,7 @@ services:
     branch: main
     envVars:
       - key: JAVA_OPTS
-        value: -Dspring.profiles.active=prod
+        value: -Dspring.profiles.active=dev
       - key: SPRING_DATASOURCE_URL
         fromDatabase:
           name: task-db
