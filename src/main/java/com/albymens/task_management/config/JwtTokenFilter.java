@@ -51,7 +51,7 @@ public class JwtTokenFilter extends OncePerRequestFilter {
                         null,
                         null
                 );
-                logger.error("Successful token validation for {}", username);
+                logger.info("Successful token validation for {}", username);
                 authToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
                 SecurityContextHolder.getContext().setAuthentication(authToken);
             } else {
