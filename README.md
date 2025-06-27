@@ -104,15 +104,15 @@ The database schema is designed with relational integrity in mind. Key tables in
     ```
 
 2. **Configure database:**
-- Configure your **MySql** database in the `application.properties` or `application.yml` file.
+- Configure your **MySql/Postgres** database in the `application.properties` or `application.yml` file.
 - Example configuration for PostgreSQL:
   ```properties
-  spring.datasource.url=jdbc:mysql://localhost:3306/taskdb
+  spring.datasource.url=
   spring.datasource.username=your_db_user
   spring.datasource.password=your_db_password
   spring.jpa.hibernate.ddl-auto=update
   spring.datasource.driver-class-name=org.postgresql.Driver
-  spring.application.name=user-transaction-tracker
+  spring.application.name=db-name
   ```
 
 3. **Build and run the application:**
@@ -150,7 +150,7 @@ Swagger Documentation (Local):
 Postman Collection:
 📂 Available in resources/test-sample/User Transaction Tracker.postman_collection.json
 Live API (Deployed on Fly.io):
-[🌍 Swagger UI - Live](https://task-management-api-z15qw.fly.dev/swagger-ui/index.html)
+[🌍 Swagger UI - Live](https://task-management-api-l7tf.onrender.com/swagger-ui/index.html)
 
 
 ## Security Considerations
