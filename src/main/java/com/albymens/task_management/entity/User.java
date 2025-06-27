@@ -11,7 +11,7 @@ import java.io.Serializable;
 import java.util.List;
 
 @Entity
-@Table(name = "user")
+@Table(name = "app_user")
 public class User implements Serializable {
 
     @Serial
