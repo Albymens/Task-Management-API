@@ -149,8 +149,9 @@ Swagger Documentation (Local):
 👉 http://localhost:8080/swagger-ui.html
 Postman Collection:
 📂 Available in resources/test-sample/User Transaction Tracker.postman_collection.json
-Live API (Deployed on Fly.io):
+Live API (Deployed on Render):
 [🌍 Swagger UI - Live](https://task-management-api-l7tf.onrender.com/swagger-ui/index.html)
+⚠️ Note: The application is hosted on Render and may take 2–3 minutes to load initially due to cold starts. If it does not appear after 3 minutes, please refresh the page.
 
 
 ## Security Considerations
