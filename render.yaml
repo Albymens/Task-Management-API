@@ -12,8 +12,6 @@ services:
         fromDatabase:
           name: task-db
           property: connectionString
-      - key: SPRING_DATASOURCE_URL
-        value: ${DATABASE_URL/postgres:/jdbc:postgresql:}
       - key: SPRING_DATASOURCE_USERNAME
         fromDatabase:
           name: task-db
@@ -26,6 +24,6 @@ services:
 
 databases:
   - name: task-db
-    databaseName: task_management_iah6
+    databaseName: task_management
     user: task_user
     plan: free
