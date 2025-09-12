@@ -8,7 +8,7 @@ services:
     envVars:
       - key: JAVA_OPTS
         value: -Dspring.profiles.active=prod
-      - key: DATABASE_URL
+      - key: SPRING_DATASOURCE_URL
         fromDatabase:
           name: task-db
           property: connectionString
@@ -20,6 +20,10 @@ services:
         fromDatabase:
           name: task-db
           property: password
+      - key: JWT_SECRET_KEY
+        value: your-secret-key
+      - key: JWT_EXPIRY_LENGTH
+        value: 3600000
     autoDeploy: true
 
 databases:
