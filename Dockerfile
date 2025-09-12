@@ -1,17 +1,17 @@
-FROM openjdk:17-jdk-slim AS build
-
-RUN apt-get update && apt-get install -y maven
+FROM eclipse-temurin:21-jdk-alpine AS build
 
 WORKDIR /app
 
-COPY pom.xml .
-RUN mvn dependency:go-offline
+COPY mvnw* pom.xml ./
+COPY .mvn .mvn
 
-COPY . .
+RUN ./mvnw dependency:go-offline
 
-RUN mvn clean package -DskipTests
+COPY src src
 
-FROM openjdk:17-jdk-slim
+RUN ./mvnw clean package -DskipTests
+
+FROM eclipse-temurin:21-jdk-alpine
 
 WORKDIR /app
 
