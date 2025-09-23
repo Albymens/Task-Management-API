@@ -36,7 +36,7 @@ public class Task implements Serializable {
 
     @ManyToOne
     @JoinColumn(name = "user_id")
-    @Schema(description = "The owner of the task")
+    @Schema(hidden = true)
     private User user;
 
     private LocalDate deadline;

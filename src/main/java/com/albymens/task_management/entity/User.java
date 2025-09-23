@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Size;
 
 import java.io.Serial;
 import java.io.Serializable;
@@ -29,6 +30,7 @@ public class User implements Serializable {
     @NotEmpty
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @Schema(description = "User's password")
+    @Size(min = 8, message = "Password must exceed 8 characters")
     private String password;
 
     @JsonIgnore
