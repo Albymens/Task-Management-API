@@ -12,6 +12,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
@@ -35,7 +37,7 @@ public class TaskController {
     )
     @PostMapping("/tasks")
     public ResponseEntity<APIResponse> createTask(@RequestBody @Valid Task task,
-                                                  @RequestHeader(value = "username") String username,
+                                                  @AuthenticationPrincipal UserDetails userDetails,
                                                   BindingResult result){
         if(result.hasErrors()){
             Map<String, String> errorMessage = new HashMap<>();
@@ -46,7 +48,7 @@ public class TaskController {
             });
             return ResponseEntity.status(400).body(new APIResponse(false, null, errorMessage));
         }
-        return taskService.createTask(username,task);
+        return taskService.createTask(userDetails.getUsername(), task);
     }
 
     @GetMapping("/tasks")
@@ -54,8 +56,8 @@ public class TaskController {
             summary = "Retrieve all tasks",
             description = "This API allows users to retrieve all their task"
     )
-    public ResponseEntity<APIResponse> retrieveUserTasks(@RequestHeader(name = "username") String username){
-        return taskService.retrieveUserTasks(username);
+    public ResponseEntity<APIResponse> retrieveUserTasks(@AuthenticationPrincipal UserDetails userDetails){
+        return taskService.retrieveUserTasks(userDetails.getUsername());
     }
 
     @PutMapping("/tasks/{taskId}")
@@ -63,10 +65,10 @@ public class TaskController {
             summary = "Update a task",
             description = "This API allows users to modify or edit a specific task"
     )
-    public ResponseEntity<APIResponse> updateTask(@RequestHeader("username") String username,
+    public ResponseEntity<APIResponse> updateTask(@AuthenticationPrincipal UserDetails userDetails,
                                                   @PathVariable Long taskId,
                                                   @RequestBody Task updatedTask){
-        return taskService.updateUserTask(username, updatedTask, taskId);
+        return taskService.updateUserTask(userDetails.getUsername(), updatedTask, taskId);
     }
 
     @DeleteMapping("/tasks/{taskId}")
@@ -74,9 +76,9 @@ public class TaskController {
             summary = "Delete task",
             description = "This API allows users to delete a specific task"
     )
-    public ResponseEntity<APIResponse> deleteTak(@RequestHeader("username") String username,
+    public ResponseEntity<APIResponse> deleteTak(@AuthenticationPrincipal UserDetails userDetails,
                                                  @PathVariable Long taskId){
-        return taskService.deleteTask(username, taskId);
+        return taskService.deleteTask(userDetails.getUsername(), taskId);
     }
 
     @GetMapping("/tasks/filter")
@@ -84,11 +86,11 @@ public class TaskController {
             summary = "Filter task based on it priority, status and deadline",
             description = "This API allows users to filter and retrieve task based on it priority, status and deadline"
     )
-    public ResponseEntity<APIResponse> filterTask(@RequestHeader("username") String username,
+    public ResponseEntity<APIResponse> filterTask(@AuthenticationPrincipal UserDetails userDetails,
                                                   @RequestParam(required = false) Status status,
                                                   @RequestParam(required = false) Priority priority,
                                                   @RequestParam(required = false) LocalDate deadline){
-        return taskService.filterTasks(username, priority, status, deadline);
+        return taskService.filterTasks(userDetails.getUsername(), priority, status, deadline);
     }
 
 }
