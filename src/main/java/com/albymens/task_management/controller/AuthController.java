@@ -18,7 +18,7 @@ import java.util.Map;
 @RestController
 @RequestMapping("/auth")
 @Tag(name = "Authentication",
-        description = "Endpoints for user authentication, including login and JWT token management.")
+        description = "Endpoints for user authentication. After a successful login, click the “Authorize” button in the top-right corner and paste JWT token to authenticate further API requests")
 public class AuthController {
     private final AuthenticationManager authenticationManager;
     private final JwtTokenProviderService jwtTokenProvider;
