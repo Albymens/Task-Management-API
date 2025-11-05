@@ -26,12 +26,7 @@ public class OpenAIConfig {
                         2. **Login(with 'Register' credentials ) to Obtain a JWT Token**
                         3. Click the **Authorize** button (top-right of Swagger UI)
                         4. Paste the JWT token to authenticate
-                        5. Proceed with API requests:
-                           - **Create a Task**
-                           - **Update a Task**
-                           - **Delete a Task**
-                           - **Retrieve All Tasks**
-                           - **Filter Tasks by Priority, Status, and Deadline**
+                        5. Proceed with API requests to create, update, delete, retrieve all, and filter tasks by priority, status, and deadline.
                         """))
                 .addSecurityItem(new SecurityRequirement().addList("Bearer Authentication"))
                 .components(new Components().addSecuritySchemes("Bearer Authentication",
