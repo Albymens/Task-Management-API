@@ -20,7 +20,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @RestController
-@Tag(name = "User Registration", description = "Endpoints for user registration")
+@Tag(name = "User Registration", description = "Endpoints for user registration. After successful registration, login using your credentials to receive a JWT token.")
 public class UserController {
     @Autowired
     UserService userService;
@@ -30,7 +30,7 @@ public class UserController {
 
     @PostMapping("/user/register")
     @Operation(
-            summary = "Register a new user. After successful registration, login using your credentials to receive a JWT token.",
+            summary = "Register a new user.",
             description = "This endpoint allows new users to register by providing their details such as username, and password. " +
                     " Successful registration generates a response with user information and a confirmation of the registration."
     )
