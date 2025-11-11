@@ -19,9 +19,11 @@ public class OpenAIConfig {
                         .version("1.0")
                         .description("""
                         API for Managing tasks which supports ✅ task prioritization,📌 status tracking,🔍 filtering, and 🔒 secure JWT authentication.
+                        
                         📂 **Source Code**: [🛠️GitHub Repository](https://github.com/Albymens/Task-Management-API.git)
-                        \nNote: To test each API click on the API, then the "Try it out button" to enable the inputs.
+                        
                         ### ✅ **Testing Flow**
+                        Note: To test each API click on the API, then the "Try it out button" to enable the inputs.
                         1. **Register a User**
                         2. **Login(with 'Register' credentials ) to Obtain a JWT Token**
                         3. Click the **Authorize** button (top-right of Swagger UI)
