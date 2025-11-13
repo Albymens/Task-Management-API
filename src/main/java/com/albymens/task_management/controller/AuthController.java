@@ -1,5 +1,6 @@
 package com.albymens.task_management.controller;
 
+import com.albymens.task_management.dto.LoginRequest;
 import com.albymens.task_management.response.APIResponse;
 import com.albymens.task_management.service.JwtTokenProviderService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -36,15 +37,14 @@ public class AuthController {
             description = "This endpoint allows users to login, After a successful login a Jwt token is generated" +
                     "and returned. This token must be used in the header for subsequent request to access protected resources"
     )
-    public ResponseEntity<APIResponse> login(@RequestHeader("username") String username,
-                                             @RequestHeader("password") String password){
+    public ResponseEntity<APIResponse> login(@RequestBody LoginRequest loginRequest){
 
         Authentication authentication = authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(username, password)
+                new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword())
         );
 
         if (!authentication.isAuthenticated()){
-            logger.error("{} login credentials failed", username);
+            logger.error("{} login credentials failed", loginRequest.getUsername());
             return ResponseEntity.status(401).body(new APIResponse(false, "Unauthorized", null));
         }
 
@@ -52,7 +52,7 @@ public class AuthController {
         Map<String, String> data = new HashMap<>();
         data.put("token", token);
 
-        logger.info("{} login successfully", username);
+        logger.info("{} login successfully", loginRequest.getUsername());
         return ResponseEntity.ok(new APIResponse(true, "Welcome!! You've Login successfully", data));
     }
 }
