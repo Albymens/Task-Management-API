@@ -7,19 +7,14 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
 
-import java.io.Serial;
-import java.io.Serializable;
 import java.util.List;
 
 @Entity
-@Table(name = "app_user")
-public class User implements Serializable {
-
-    @Serial
-    private static final long serialVersionUID = 1L;
+@Table(name = "app_user", uniqueConstraints = @UniqueConstraint(columnNames = "username"))
+public class User {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Schema(hidden = true)
     private Long id;
 
